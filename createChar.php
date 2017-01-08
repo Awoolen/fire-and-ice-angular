@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<title>Fire and Ice: Create Your Character</title>
-		<link type="text/css" rel="stylesheet" href="fireice.css"/>
+		<link type="text/css" rel="stylesheet" href="css/fireice.css"/>
 		<script src="http://use.edgefonts.net/aladin.js"></script>
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-		<script src="cookies.js"></script>
-		<script src="main.js"></script>
+		<script src="js/cookies.js"></script>
+		<script src="js/main.js"></script>
 	</head>
 	<body><center>
 		<div class="content">
@@ -28,7 +28,7 @@
 					<input type="radio" id="fireice" value="Fire"/>Fire <br/>
 					<input type="radio" id="fireice" value="Ice"/>Ice
 				</p>
-				<button>Create Character</button>
+				<button onClick="form.submit()">Create Character</button>
 			</form>
 		</div>
 	</center></body>
