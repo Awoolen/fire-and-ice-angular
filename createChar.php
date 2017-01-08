@@ -3,6 +3,7 @@
 	<head>
 		<title>Fire and Ice: Create Your Character</title>
 		<link type="text/css" rel="stylesheet" href="css/fireice.css"/>
+		<link type="text/css" rel="stylesheet" href="css/materialize.css"/>
 		<script src="http://use.edgefonts.net/aladin.js"></script>
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="js/cookies.js"></script>
