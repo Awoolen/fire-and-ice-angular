@@ -220,7 +220,7 @@ function fillSlot(slot){
 	var loadButton = "";
 	if(JSON.parse(getCookie("slot" + slot)) == null){
 		var player = "Slot " + slot + " Empty";
-		loadButton = "<a class='load btn' href='createChar.html?slot=" + slot + "'>New Player</a>";
+		loadButton = "<a class='load btn' href='createChar.php?slot=" + slot + "'>New Player</a>";
 	}
 	else{
 		var player = JSON.parse(getCookie("slot" + slot));
