@@ -2,11 +2,11 @@
 <html>
 	<head>
 		<title>Fire and Ice</title>
-		<link type="text/css" rel="stylesheet" href="fireice.css"/>
+		<link type="text/css" rel="stylesheet" href="css/fireice.css"/>
 		<script src="http://use.edgefonts.net/aladin.js"></script>
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-		<script src="cookies.js"></script>
-		<script src="main.js"></script>
+		<script src="js/cookies.js"></script>
+		<script src="js/main.js"></script>
 	</head>
 	<body onLoad="javascript:initGame()"><center>
 		<header>
