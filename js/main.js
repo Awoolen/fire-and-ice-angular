@@ -83,7 +83,7 @@ function createChar(){
 	createCookie("slot" + slot, JSON.stringify(currentChar), 365);
 	
 	
-	location.href = "play.html?slot=" + slot;
+	location.href = "play.php?slot=" + slot;
 	
 	return false;
 	
@@ -255,7 +255,7 @@ function backdoor(){
 	neandra.experience = 9999;
 	createCookie("slotadmin", JSON.stringify(neandra), 365);
 	console.log("Admin player created");
-	location.href = "play.html?slot=admin";
+	location.href = "play.php?slot=admin";
 }
 
 function random(min, max){
