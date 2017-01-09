@@ -83,7 +83,7 @@ function createChar(){
 	createCookie("slot" + slot, JSON.stringify(currentChar), 365);
 	
 	
-	location.href = "play.php?slot=" + slot;
+	location.href = "play.html?slot=" + slot;
 	
 	return false;
 	
@@ -220,13 +220,13 @@ function fillSlot(slot){
 	var loadButton = "";
 	if(JSON.parse(getCookie("slot" + slot)) == null){
 		var player = "Slot " + slot + " Empty";
-		loadButton = "<a class='load btn' href='createChar.php?slot=" + slot + "'>New Player</a>";
+		loadButton = "<a class='load btn' href='createChar.html?slot=" + slot + "'>New Player</a>";
 	}
 	else{
 		var player = JSON.parse(getCookie("slot" + slot));
 		player = player.name + " " + player.level;
 	
-	loadButton = "<a class='load btn' href='play.php?slot=" + slot + "'>Load Player</a>";
+	loadButton = "<a class='load btn' href='play.html?slot=" + slot + "'>Load Player</a>";
 	}
 	$('#slot'+slot).html("<td class='name'>" + player + "</td><td>" + loadButton + "</td>");
 }
@@ -255,7 +255,7 @@ function backdoor(){
 	neandra.experience = 9999;
 	createCookie("slotadmin", JSON.stringify(neandra), 365);
 	console.log("Admin player created");
-	location.href = "play.php?slot=admin";
+	location.href = "play.html?slot=admin";
 }
 
 function random(min, max){
