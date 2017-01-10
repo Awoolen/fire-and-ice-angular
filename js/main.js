@@ -31,10 +31,11 @@ function Character(name, gender, age, species, fireOrIce){
 	this.age = age;
 	this.species = species;
 	this.fireOrIce = fireOrIce;
-	this.strength = 20;
-	this.agility = 20;
-	this.defence = 20;
-	this.intelligence = 20;
+	this.strength = 20; //helps base damage
+	this.agility = 20; //helps dodge attacks
+	this.defence = 20; //helps block attacks
+	this.intelligence = 20; //gives more mana and spell damage
+	this.wisdom = 20; //increases all stats
 	this.mana = 30;
 	this.health = 100;
 	this.experience = 0;
@@ -149,6 +150,8 @@ function fight(){
 /**************************************
 	HELPER METHODS
 ***************************************/
+
+//A lot of these methods are potentially unnecessary, but they make the code more readable for me, at least
 
 function upHealth(num){
 	$('#health').attr("aria-valuenow", function(i, origValue){
@@ -288,7 +291,7 @@ function log(message){
 }
 
 function addExp(enemyLevel){
-	currentChar.experience+=(level*0.1);
+	currentChar.experience+=(enemyLevel*0.1);
 	//if experience is a certain level, level up
 	if(currentChar.experience >= 300+((level + enemyLevel) * 80)){
 	  levelUp();
@@ -306,7 +309,15 @@ function lowerExp(){
 
 function levelUp(){
   currentChar.level++;
-  //other multipliers
-  currentChar.intelligence += (level*0.2);
-  
+  refactorStats();
+  //toast levelup
+}
+
+function refactorStats(){
+  //not a priority until the interface is fixed
+ /* currentChar.intelligence = intBaseLevel + (level*0.2) + intMulti;
+  currentChar.wisdom = wisBaseLevel + (level*0.5) + wisMulti;
+  currentChar.strength = strBaseLevel + (level*0.3) + strMulti;
+  currentChar.agility = agilBaseLevel + (level * )*/
+  console.log('Stats refactored.');
 }
