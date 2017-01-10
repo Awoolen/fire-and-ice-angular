@@ -128,7 +128,7 @@ function fight(){
 	log("You struck the " + enemy.name + " for " + damage + " damage.");
 	if($('#enemyH').attr("aria-valuenow") < 1){
 		log("You defeated the " + enemy.name + "!");
-		addStats();
+		addExp();
 		setEnemy();
 	}
 	else{
@@ -137,7 +137,7 @@ function fight(){
 		log("The " + enemy.name + " struck you for " + damageT + " damage.");
 		if($('#health').attr("aria-valuenow") < 1){
 			log("You have been terribly wounded. Neandra spends " + random(10, 70) + " of her mana to heal you. You must rest.");
-			lowerStats();
+			lowerExp();
 			rest();
 			setEnemy();
 		}
@@ -287,22 +287,26 @@ function log(message){
 	console.log(message);
 }
 
-function addStats(){
-	//TODO: work out stat multipliers
-	currentChar.strength++;
-	currentChar.agility++;
-	currentChar.defence++;
-	currentChar.intelligence++;
-	currentChar.experience++;
+function addExp(enemyLevel){
+	currentChar.experience+=(level*0.1);
 	//if experience is a certain level, level up
+	if(currentChar.experience >= 300+((level + enemyLevel) * 80)){
+	  levelUp();
+	  currentChar.experience = 0;
+	}
 }
 
-function lowerStats(){
-	//TODO: work out stat multipliers
-	currentChar.strength--;
-	currentChar.agility--;
-	currentChar.defence--;
-	currentChar.intelligence--;
-	currentChar.experience--;
-	//do something or other
+function lowerExp(){
+	currentChar.experience-=(level*0.05);
+	//don't let experience be less than 0
+	if(currentChar.experience < 0){
+	  currentChar.experience = 0;
+	}
+}
+
+function levelUp(){
+  currentChar.level++;
+  //other multipliers
+  currentChar.intelligence += (level*0.2);
+  
 }
