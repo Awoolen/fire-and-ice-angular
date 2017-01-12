@@ -72,7 +72,7 @@ function initGame(){
 function createChar(){
 	var name = $('#name').val();
 	var age = $('#age').val();
-	var gender = $('#gen:checked').val();
+	var gender = $('.gen:checked').val();
 	var species = $('#species').val();
 	var fireice = $('#fireice:checked').val();
 	

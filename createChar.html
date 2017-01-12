@@ -10,9 +10,9 @@
 		<script src="js/main.js"></script>
 		<script src="js/bin/materialize.js"></script>
 		<script>
-		  $(document).ready(function() {
-    $('select').material_select();
-  });
+		$(document).ready(function() {
+			$('select').material_select();
+		});
 		</script>
 	</head>
 	<body><center>
@@ -36,11 +36,11 @@
 			    <div class="col s8 offset-s2 input-field">
 			      Gender:
 			      <p>
-			        <input name="gender" type="radio" id="M"/>
+			        <input id="gender" type="radio" id="M"/>
 			        <label for="M">Male</label>
 			      </p>
 			      <p>
-			        <input name="gender" type="radio" id="F" />
+			        <input id="gender" type="radio" id="F" />
 			        <label for="F">Female</label>
 			      </p>
 			    </div>
@@ -55,11 +55,20 @@
 					<label>Species</label>
 					</div>
 				</div>
-				<p id="row">Dragon-person or Ice Master?
-					<input type="radio" id="fireice" value="Fire"/>Fire <br/>
-					<input type="radio" id="fireice" value="Ice"/>Ice
-				</p>
-				<button onClick="form.submit()">Create Character</button>
+				<div class="row">
+					<div class="col s8 offset-s2 input-field">
+						<label>Dragon-person or Ice Master?</label>
+						<p>
+							<input type="radio" id="fireice" id="fire"/>
+							<label for="fire">Fire</label>
+						</p>
+						<p>
+							<input type="radio" id="fireice" id="ice"/>
+							<label for="ice">Ice</label>
+						</p>
+					</div>
+				</div>
+				<button class="btn" onClick="form.submit()">Create Character</button>
 			</form>
 		</div>
 	</center></body>
