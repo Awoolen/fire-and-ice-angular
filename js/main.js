@@ -11,6 +11,7 @@ var maxHealth = 100;//default in case things go wrong with the cookies
 var maxMana = 30;
 var currHealthRate = 10;
 var currManaRate = 5;
+var resting = false; // checks whether player is currently resting
 var slot = 0; //sets slot for cookie grabbing and stuff
 var fireEnemies = [
 	new Enemy("Dragon Scout", 150, 10, 20, 1)
@@ -109,15 +110,21 @@ function setUp(){
 }
 
 function rest(){
-	var resting = true;
-	while(resting){
-		setTimeout(upHealth(currHealthRate), 2000);
-		console.log("resting");
-		if($('#health').attr("aria-valuenow") >= maxHealth){
-			console.log("done resting");
-			$('#health').attr("aria-valuenow", maxHealth);
-			resting = false;
-		}
+	// Solution from: http://stackoverflow.com/a/1495907/6447865
+
+	// added check to avoid multiple resting "timers"
+	if (!resting) {
+		timeoutID = setInterval(function () {
+			resting = true;
+			upHealth(currHealthRate);
+
+	        if($('#health').attr("aria-valuenow") >= maxHealth){
+				console.log("done resting");
+				$('#health').attr("aria-valuenow", maxHealth);
+				resting = false;
+				clearInterval(timeoutID);
+			}
+	    }, 2000);
 	}
 }
 
