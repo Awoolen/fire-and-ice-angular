@@ -11,57 +11,67 @@
 		<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 		<script src="js/cookies.js"></script>
 		<script src="js/main.js"></script>
+		<script src="js/bin/materialize.js"></script>
 		<script src="js/tabs.js"></script>
 	</head>
-	<body onload="javascript:setUp()"><center>
+	<body onload="javascript:setUp()"><center><div class="container">
+	<!--add main bar (experience, character data) here-->
 		<div class="row"><div class="col s12">
 			<ul class="tabs">
-				<li class="tab col s3"><a class="active"  href="#battle">Battle</a></li>
-				<li class="tab col s3"><a href="#train">Training</a></li>
-				<li class="tab col s3"><a href="#invent">Inventory</a></li>
-				<li class="tab col s3"><a href="#shop">Shop</a></li>
-				<!--<li>Save (coming soon)</li>-->
+				<li class="tab col s3"><a href="#battle">Battle</a></li>
+				<li class="tab col s3"><a href="#village">Village</a></li>
+				<li class="tab col s2"><a href="#story">Story</a></li>
+				<li class="tab col s2"><a href="#map">Map</a></li>
+				<li class="tab col s3">Save (coming soon)</li>
 			</ul>
-		</div>
-		<div id="battle" class="col s12">
-			<h2> This will be the battle screen </h2>
-			<div class="stats col-md-3 col-sm-12">
-				<p id="name"></p>
-				Health: 
-				<div class="progress">
-					<div class="progress-bar" id="health" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="100" style="width:0%">0/100</div>
-				</div>
-				Mana:
-				<div class="progress">
-					<div class="progress-bar" id="mana" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="30" style="width:0%">0/0</div>
-				</div>
-				<button onclick="rest()">Rest</button>
-		</div>
-		<div class="fight col-md-6 col-sm-12">
-			<div id="enemy">
-						<p id="eInfo"></p>
-						<p>Neat animation here</p>
+		</div></div>
+		<div class="row">
+			<div id="battle" class="col s12">
+				<h2> This will be the battle screen </h2>
+				<div class="stats col m3 s12">
+					<div class="card eton-blue small"><div class="card-content">
+						<span class="card-title">Statistics</span>
+						<p>Health: 
 						<div class="progress">
-							<div class="progress-bar" id="enemyH" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="100" style="width:0%">0/100</div>
+							<div class="progress-bar" id="health" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="100" style="width:0%">0/100</div>
 						</div>
-					</div>
-					<button onclick="fight()">Attack</button>
-					<div class="panel panel-default">
-						<a href="#spells" data-toggle="collapse"><div class="panel-heading">Spells</div></a>
-						<div id="spells" class="panel-body collapse"> various spells</div>
-					</div>
+						<p>Mana:</p>
+						<div class="progress">
+							<div class="progress-bar" id="mana" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="30" style="width:0%">0/0</div>
+						</div>
+						<button class="btn" onclick="rest()">Rest</button>
+					</div></div>
 				</div>
-				<div class="log col-md-3 col-sm-12">Welcome back!</div>
-			</div>
-			<div id="train" class="col s12">
-				<h2> this will be the training screen </h2>
-			</div>
-			<div id="invent" class="tab-pane">
-				<h2> this will be the inventory screen </h2>
-			</div>
-			<div id="shop" class="tab-pane">
-				<h2> this will be the shop screen </h2>
+				<div class="fight col m6 s12">
+					<div class="card eton-blue small"><div class="card-content">
+						<span class="card-title" id="eInfo"></span>
+						<div id="enemy">
+							<p>Neat animation here</p>
+							<div class="progress">
+								<div class="progress-bar" id="enemyH" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="100" style="width:0%">0/100</div>
+							</div>
+						</div>
+						<button class="btn" onclick="fight()">Attack</button>
+						<div class="panel panel-default">
+							<a href="#spells" data-toggle="collapse"><div class="panel-heading">Spells</div></a>
+							<div id="spells" class="panel-body collapse"> various spells</div>
+						</div>
+					</div></div>
+				</div>
+				<div class="log col m3 s12"><div class="card eton-blue small"><div class="card-content">
+					<span class="card-title">Log</span>
+					<p>Welcome back!</p>
+				</div></div></div>
 			</div>
 		</div>
-	</center></body>
+		<div id="village" class="tab-pane">
+			<h2> this will be the village screen </h2>
+		</div>
+		<div id="story" class="col s12">
+			<h2> this will be the story screen </h2>
+		</div>
+		<div id="map" class="tab-pane">
+			<h2> this will be the map screen </h2>
+		</div>
+	</div></center></body>
 </html>
