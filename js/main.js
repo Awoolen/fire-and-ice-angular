@@ -1,18 +1,20 @@
 /* Welcome to Fire and Ice! This will probably be a big mess of a file! Yay for code! 
 
 	WHOA MY GOSH I'M USING COOKIES! Never done this before! I don't know what I'm doing at all!
+	
+	EDIT: Aaaand nooooow, using... *drumroll* ...localStorage! Which is actually 10x more simple than I thought it would be!
 */
 /*************************************
 	VARIABLE DECLARATIONS 'CAUSE SCOPE
 **************************************/
-var newGame = checkNewGame(); //checks whether or not to reset the cookies
+var newGame = checkNewGame(); //checks whether or not to reset the localStorage
 var currentChar = null; //global variable for player's character
-var maxHealth = 100;//default in case things go wrong with the cookies
+var maxHealth = 100;//default in case things go wrong with the localStorage
 var maxMana = 30;
 var currHealthRate = 10;
 var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
-var slot = 0; //sets slot for cookie grabbing and stuff
+var slot = 0; //sets slot for data grabbing and stuff
 var fireEnemies = [
 	new Enemy("Dragon Scout", 150, 10, 20, 1)
 ];//list of enemies of the Ice Masters
@@ -58,12 +60,12 @@ function Enemy(name, health, min, max, level){
 function initGame(){
 	//set up vars and things
 	if(newGame){
-		//set up cookies
-		createCookie("slot1", null, 365); 
-		createCookie("slot1", null, 365); 
-		createCookie("slot1", null, 365); 
-		createCookie("slot1", null, 365); 
-		createCookie("newGame", false, 365); 
+		//set up local storage
+		setData("slot1", null); 
+		setData("slot1", null); 
+		setData("slot1", null); 
+		setData("slot1", null); 
+		setData("newGame", false); 
 	}
 	
 	checkSlots();
@@ -82,7 +84,7 @@ function createChar(){
 	slot = getQueryVariable("slot");
 	
 		
-	createCookie("slot" + slot, JSON.stringify(currentChar), 365);
+	setData("slot" + slot, JSON.stringify(currentChar));
 	
 	
 	location.href = "play.html?slot=" + slot;
@@ -93,7 +95,7 @@ function createChar(){
 
 function setUp(){
 	slot = getQueryVariable("slot");
-	currentChar = JSON.parse(getCookie("slot" + slot));
+	currentChar = JSON.parse(getData("slot" + slot));
 	$('#name').html(currentChar.name);
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
@@ -215,25 +217,25 @@ function downEHealth(num){
 }
 
 function checkNewGame(){
-	if(getCookie("newGame") == "")
+	if(getData("newGame") == "")
 		return true;
 	return false;
 }
 
 function checkSlots(){
 	for(var i = 0; i < 4; i++)
-		if(getCookie("slot" + i) != "")
+		if(getData("slot" + i) != "")
 			fillSlot(i+1);
 }
 
 function fillSlot(slot){
 	var loadButton = "";
-	if(JSON.parse(getCookie("slot" + slot)) == null){
+	if(JSON.parse(getData("slot" + slot)) == null){
 		var player = "Slot " + slot + " Empty";
 		loadButton = "<a class='load btn' href='createChar.html?slot=" + slot + "'>New Player</a>";
 	}
 	else{
-		var player = JSON.parse(getCookie("slot" + slot));
+		var player = JSON.parse(getData("slot" + slot));
 		player = player.name + " " + player.level;
 	
 	loadButton = "<a class='load btn' href='play.html?slot=" + slot + "'>Load Player</a>";
@@ -263,7 +265,7 @@ function backdoor(){
 	neandra.health = 1000;
 	neandra.level = 100;
 	neandra.experience = 9999;
-	createCookie("slotadmin", JSON.stringify(neandra), 365);
+	setData("slotadmin", JSON.stringify(neandra));
 	console.log("Admin player created");
 	location.href = "play.html?slot=admin";
 }
