@@ -11,6 +11,7 @@ var newGame = checkNewGame(); //checks whether or not to reset the localStorage
 var currentChar = null; //global variable for player's character
 var maxHealth = 100;//default in case things go wrong with the localStorage
 var maxMana = 30;
+var exp = 0;
 var currHealthRate = 10;
 var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
@@ -97,6 +98,11 @@ function setUp(){
 	slot = getQueryVariable("slot");
 	currentChar = JSON.parse(getData("slot" + slot));
 	$('#name').html(currentChar.name);
+	var info = currentChar.age + " year-old " + currentChar.species;
+	$('#pInfo').html(info);
+	exp = currentChar.experience;
+	$('#exp').attr("aria-valuemax", 100);
+	
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
 	upHealth(maxHealth);
@@ -236,7 +242,7 @@ function fillSlot(slot){
 	}
 	else{
 		var player = JSON.parse(getData("slot" + slot));
-		player = player.name + " " + player.level;
+		player = player.name + "</br>Level: " + player.level;
 	
 	loadButton = "<a class='load btn' href='play.html?slot=" + slot + "'>Load Player</a>";
 	}
@@ -244,8 +250,7 @@ function fillSlot(slot){
 }
 
 //from CSS-Tricks: https://css-tricks.com/snippets/javascript/get-url-variables/
-function getQueryVariable(variable)
-{
+function getQueryVariable(variable){
        var query = window.location.search.substring(1);
        var vars = query.split("&");
        for (var i=0;i<vars.length;i++) {
@@ -295,7 +300,7 @@ function setEnemy(){
 }
 
 function log(message){
-	$('.log').append("<p>" + message + "</p>");
+	$('.log .card-content > p:nth-child(2)').before("<p>" + message + "</p>");
 	console.log(message);
 }
 
