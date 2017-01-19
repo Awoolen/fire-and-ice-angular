@@ -145,6 +145,7 @@ function fight(){
 	if($('#enemyH').attr("aria-valuenow") < 1){
 		log("You defeated the " + enemy.name + "!");
 		addExp();
+		clearLog();
 		setEnemy();
 	}
 	else{
@@ -155,6 +156,7 @@ function fight(){
 			log("You have been terribly wounded. Neandra spends " + random(10, 70) + " of her mana to heal you. You must rest.");
 			lowerExp();
 			rest();
+			clearLog();
 			setEnemy();
 		}
 	}
@@ -299,32 +301,41 @@ function setEnemy(){
 	
 }
 
-function log(message){
+function log(message){	
 	$('.log .card-content > p:nth-child(2)').before("<p>" + message + "</p>");
 	console.log(message);
 }
 
+function clearLog(){
+	$('.log .card-content p').remove();
+}
+
+function toast(message){
+	Materialize.toast(message, 4000);
+}
+
 function addExp(enemyLevel){
-	currentChar.experience+=(enemyLevel*0.1);
+	/*currentChar.experience+=(enemyLevel*0.1);
 	//if experience is a certain level, level up
 	if(currentChar.experience >= 300+((level + enemyLevel) * 80)){
 	  levelUp();
 	  currentChar.experience = 0;
-	}
+	}*/
 }
 
 function lowerExp(){
-	currentChar.experience-=(level*0.05);
+	/*currentChar.experience-=(level*0.05);
 	//don't let experience be less than 0
 	if(currentChar.experience < 0){
 	  currentChar.experience = 0;
-	}
+	}*/
 }
 
 function levelUp(){
   currentChar.level++;
   refactorStats();
   //toast levelup
+  toast("Levelled up to level " + currentChar.level);
 }
 
 function refactorStats(){
