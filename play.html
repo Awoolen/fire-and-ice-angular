@@ -13,14 +13,22 @@
 		<script src="js/main.js"></script>
 		<script src="js/bin/materialize.js"></script>
 		<script src="js/tabs.js"></script>
+		<script src="js/carousel.js"></script>
+		<script src="js/tooltip.js"></script>
+		<script>
+			$(document).ready(function(){
+				$('.carousel').carousel();
+			});
+		</script>
 	</head>
 	<body onload="javascript:setUp()"><center><div class="container">
 		<div class="row"><div class="col s12">
 			<p id="name"></p>
 			<p id="pInfo"></p>
 			<div class="progress">
-				<div class="progress-bar" id="exp" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="100" style="width:0%; height:20px !important;">0/100</div>
+				<div class="progress-bar tooltipped" id="exp" role="progressbar" aria-valuenow="0"  aria-valuemin="0" aria-valuemax="100" style="width:0%; height:20px !important;" data-position="bottom" data-tooltip="0/100"></div>
 			</div>
+			<!--<a class="btn tooltipped" data-position="bottom" data-tooltip="hi"/></a>-->
 		</div></div>
 		<div class="row"><div class="col s12">
 			<ul class="tabs">
@@ -31,6 +39,7 @@
 				<li class="tab col s3">Save (coming soon)</li>
 			</ul>
 		</div></div>
+		<!--Battle-->
 		<div class="row">
 			<div id="battle" class="col s12">
 				<h2> This will be the battle screen </h2>
@@ -70,14 +79,41 @@
 				</div></div></div>
 			</div>
 		</div>
-		<div id="village" class="tab-pane">
-			<h2> this will be the village screen </h2>
+		<!--Village-->
+		<div class="row">
+			<div id="village" class="tab-pane col s12">
+				<h2> this will be the village screen </h2>
+				<div class="carousel">
+					<a class="carousel-item"><div class="card"><div class="card-content medium">
+						<span class="card-title">Hi!</span>
+						Test!
+					</div></div></a>
+					<a class="carousel-item"><div class="card"><div class="card-content">
+						<span class="card-title">Hi!</span>
+						Test!
+					</div></div></a>
+					<a class="carousel-item"><div class="card"><div class="card-content">
+						<span class="card-title">Hi!</span>
+						Test!
+					</div></div></a>
+					<a class="carousel-item"><div class="card"><div class="card-content">
+						<span class="card-title">Hi!</span>
+						Test!
+					</div></div></a>
+				</div>
+			</div>
 		</div>
-		<div id="story" class="col s12">
-			<h2> this will be the story screen </h2>
+		<!--Story-->
+		<div class="row">
+			<div id="story" class="col s12 tab-pane">
+				<h2> this will be the story screen </h2>
+			</div>
 		</div>
-		<div id="map" class="tab-pane">
-			<h2> this will be the map screen </h2>
+		<!--Map-->
+		<div class="row">
+			<div id="map" class="tab-pane col s12">
+				<h2> this will be the map screen </h2>
+			</div>
 		</div>
 	</div></center></body>
 </html>
