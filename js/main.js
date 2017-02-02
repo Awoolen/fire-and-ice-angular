@@ -101,7 +101,10 @@ function setUp(){
 	var info = currentChar.age + " year-old " + currentChar.species;
 	$('#pInfo').html(info);
 	exp = currentChar.experience;
-	$('#exp').attr("aria-valuemax", 100);
+	var maxExp = parseInt($('#exp').attr("aria-valuemax"));
+	var percent = 100 * (exp/maxExp);
+	$('#exp').attr("style", "width: " + percent + "%;");
+	$('.exp').attr("data-tooltip", "" + exp + "/" + maxExp);
 	
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
@@ -178,7 +181,8 @@ function upHealth(num){
 	var maxNum = parseInt($('#health').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#health').attr("style", "width: " + percent + "%;");
-	$('#health').html("" + currentNum + "/" + maxNum);
+	$('.health').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function upMana(num){
@@ -189,7 +193,8 @@ function upMana(num){
 	var maxNum = parseInt($('#mana').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#mana').attr("style", "width: " + percent + "%;");
-	$('#mana').html("" + currentNum + "/" + maxNum);
+	$('.mana').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function downHealth(num){
@@ -200,7 +205,8 @@ function downHealth(num){
 	var maxNum = parseInt($('#health').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#health').attr("style", "width: " + percent + "%;");
-	$('#health').html("" + currentNum + "/" + maxNum);
+	$('.health').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function downMana(num){
@@ -210,7 +216,8 @@ function downMana(num){
 	var maxNum = parseInt($('#mana').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#mana').attr("style", "width: " + percent + "%;");
-	$('#mana').html("" + currentNum + "/" + maxNum);
+	$('.mana').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function downEHealth(num){
@@ -221,7 +228,8 @@ function downEHealth(num){
 	var maxNum = parseInt($('#enemyH').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#enemyH').attr("style", "width: " + percent + "%;");
-	$('#enemyH').html("" + currentNum + "/" + maxNum);
+	$('.enemy').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function checkNewGame(){
@@ -293,7 +301,8 @@ function setEnemy(){
 		"style" : "width: 100%;"
 	});
 	
-	$('#enemyH').html("" + enemy.health + "/" + enemy.health);
+	$('.enemy').attr("data-tooltip", "" + enemy.health + "/" + enemy.health);
+	initTooltip();
 	
 	var stats = "<h4>" + enemy.name + "</h4>\nStrength: " + enemy.minDamage + "-" + enemy.maxDamage + "\nKilled: " + enemy.numKilled;
 	
@@ -321,6 +330,12 @@ function addExp(enemyLevel){
 	  levelUp();
 	  currentChar.experience = 0;
 	}*/
+	var currentNum = currentChar.experience;
+	var maxNum = parseInt($('#exp').attr("aria-valuemax"));
+	var percent = 100 * (currentNum/maxNum);
+	$('#exp').attr("style", "width: " + percent + "%;");
+	$('.exp').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function lowerExp(){
@@ -329,6 +344,12 @@ function lowerExp(){
 	if(currentChar.experience < 0){
 	  currentChar.experience = 0;
 	}*/
+	var currentNum = currentChar.experience;
+	var maxNum = parseInt($('#exp').attr("aria-valuemax"));
+	var percent = 100 * (currentNum/maxNum);
+	$('#exp').attr("style", "width: " + percent + "%;");
+	$('.exp').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function levelUp(){
@@ -345,4 +366,8 @@ function refactorStats(){
   currentChar.strength = strBaseLevel + (level*0.3) + strMulti;
   currentChar.agility = agilBaseLevel + (level * )*/
   console.log('Stats refactored.');
+}
+
+function initTooltip(){
+    $('.tooltipped').tooltip();
 }
