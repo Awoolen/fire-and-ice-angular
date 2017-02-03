@@ -17,13 +17,24 @@ var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
 var slot = 0; //sets slot for data grabbing and stuff
 var fireEnemies = [
-	new Enemy("Dragon Scout", 150, 10, 20, 1)
+	new Enemy("Dragon Scout", 150, 10, 20, 1),
+	new Enemy("Dragon Novice", 175, 15, 23, 2)
 ];//list of enemies of the Ice Masters
 var iceEnemies = [
-	new Enemy("Frost Scout", 150, 10, 20, 1)
+	new Enemy("Frost Scout", 150, 10, 20, 1),
+	new Enemy("Frost Novice", 175, 15, 23, 2)
 ];//list of enemies of the Dragons
 var enemies = [];//empty enemy list, filled during setup
 var enemy; //holds current enemy
+var story = [
+	"Part1",
+	"part2",
+	"part3"
+]; //holds story parts
+
+var storyLis = [
+	"<li>1</li>"
+]; //holds lis for story tabs
 
 /**************************************
 	CONSTRUCTORS
@@ -44,6 +55,7 @@ function Character(name, gender, age, species, fireOrIce){
 	this.health = 100;
 	this.experience = 0;
 	this.level = 1;
+	this.story = 1;
 }
 
 function Enemy(name, health, min, max, level){
@@ -52,7 +64,7 @@ function Enemy(name, health, min, max, level){
 	this.minDamage = min;
 	this.maxDamage = max;
 	this.level = level;
-	this.numKilled = 0;
+	this.numKilled = 0; //decides when you can leave an area
 }
 
 /**************************************
@@ -63,9 +75,9 @@ function initGame(){
 	if(newGame){
 		//set up local storage
 		setData("slot1", null); 
-		setData("slot1", null); 
-		setData("slot1", null); 
-		setData("slot1", null); 
+		setData("slot2", null); 
+		setData("slot3", null); 
+		setData("slot4", null); 
 		setData("newGame", false); 
 	}
 	
@@ -164,6 +176,15 @@ function fight(){
 			clearLog();
 			setEnemy();
 		}
+	}
+}
+
+function story(partsLoaded){
+	for(var i = 0; i < partsLoaded; i++){
+		if(i%5 == 0){
+			//load new ul
+		}
+		//load story part
 	}
 }
 
