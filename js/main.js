@@ -123,6 +123,8 @@ function setUp(){
 	$('#exp').attr("style", "width: " + percent + "%;");
 	$('.exp').attr("data-tooltip", "" + exp + "/" + maxExp);
 	
+	$(".village-tabs").hide();
+	
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
 	upHealth(maxHealth);
