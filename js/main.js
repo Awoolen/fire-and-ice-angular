@@ -31,10 +31,15 @@ var story = [
 	"part2",
 	"part3"
 ]; //holds story parts
-
 var storyLis = [
 	"<li>1</li>"
 ]; //holds lis for story tabs
+var inventory = [];
+var potion_types = [
+	"health", //gives HP
+	"strength", //boosts strength stat
+	"magic" //gives mana
+];//holds potion list for dropping
 
 /**************************************
 	CONSTRUCTORS
