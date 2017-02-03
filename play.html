@@ -3,6 +3,7 @@
 	<head>
 		<title>Fire and Ice</title>
 		<meta charset="utf-8">
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link type="text/css" rel="stylesheet" href="css/fireice.css"/>
@@ -94,24 +95,109 @@
 		<!--Village-->
 		<div class="row">
 			<div id="village" class="tab-pane col s12">
-				<h2> this will be the village screen </h2>
-				<div class="carousel">
-					<a class="carousel-item"><div class="card"><div class="card-content medium">
-						<span class="card-title">Hi!</span>
-						<p>Test!</p>
-					</div></div></a>
-					<a class="carousel-item"><div class="card"><div class="card-content">
-						<span class="card-title">Hi!</span>
-						<p>Test!</p>
-					</div></div></a>
-					<a class="carousel-item"><div class="card"><div class="card-content">
-						<span class="card-title">Hi!</span>
-						<p>Test!</p>
-					</div></div></a>
-					<a class="carousel-item"><div class="card"><div class="card-content">
-						<span class="card-title">Hi!</span>
-						<p>Test!</p>
-					</div></div></a>
+				<!--<h2> this will be the village screen </h2>-->
+				<!--Inventory-->
+				<div class="card medium col s4 outer-space" style="margin: 10px;">
+					<div class="card-image waves-effect waves-block waves-light">
+					  <img class="activator" src="images/battle-gear.png">
+					</div>
+					<div class="card-content">
+					  <span class="card-title activator grey-text text-darken-4">Inventory<i class="material-icons right">more_vert</i></span>
+					  <p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+					  <span class="card-title grey-text text-darken-4">Inventory<i class="material-icons right">close</i></span>
+					  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				</div>
+				<!--Training-->
+				<div class="card medium col s4 outer-space">
+					<div class="card-image waves-effect waves-block waves-light">
+					  <img class="activator" src="images/drop-weapon.png">
+					</div>
+					<div class="card-content">
+					  <span class="card-title activator grey-text text-darken-4">Training<i class="material-icons right">more_vert</i></span>
+					  <p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+					  <span class="card-title grey-text text-darken-4">Training<i class="material-icons right">close</i></span>
+					  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				</div>
+				<!--Field-->
+				<div class="card medium col s4 outer-space" style="margin: 10px">
+					<div class="card-image waves-effect waves-block waves-light">
+					  <img class="activator" src="images/field.png">
+					</div>
+					<div class="card-content">
+					  <span class="card-title activator grey-text text-darken-4">Field<i class="material-icons right">more_vert</i></span>
+					  <p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+					  <span class="card-title grey-text text-darken-4">Field<i class="material-icons right">close</i></span>
+					  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				  </div>
+				 <!--Shop-->
+				  <div class="card medium col s4">
+					<div class="card-image waves-effect waves-block waves-light">
+					  <img class="activator" src="images/barracks-tent.png">
+					</div>
+					<div class="card-content">
+					  <span class="card-title activator grey-text text-darken-4">Shop<i class="material-icons right">more_vert</i></span>
+					  <p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+					  <span class="card-title grey-text text-darken-4">Shop<i class="material-icons right">close</i></span>
+					  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				  </div>
+				  <!--Tavern-->
+				  <div class="card medium col s4">
+					<div class="card-image waves-effect waves-block waves-light">
+					  <img class="activator" src="images/meal.png">
+					</div>
+					<div class="card-content">
+					  <span class="card-title activator grey-text text-darken-4">Tavern<i class="material-icons right">more_vert</i></span>
+					  <p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+					  <span class="card-title grey-text text-darken-4">Tavern<i class="material-icons right">close</i></span>
+					  <p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				  </div>
+				
+				<div id="invent" class="village-tabs">
+					<div class="carousel">
+						<a class="carousel-item"><div class="card"><div class="card-content medium">
+							<span class="card-title">Hi!</span>
+							<p>Test!</p>
+						</div></div></a>
+						<a class="carousel-item"><div class="card"><div class="card-content">
+							<span class="card-title">Hi!</span>
+							<p>Test!</p>
+						</div></div></a>
+						<a class="carousel-item"><div class="card"><div class="card-content">
+							<span class="card-title">Hi!</span>
+							<p>Test!</p>
+						</div></div></a>
+						<a class="carousel-item"><div class="card"><div class="card-content">
+							<span class="card-title">Hi!</span>
+							<p>Test!</p>
+						</div></div></a>
+					</div>
+				</div>
+				<div id="train" class="village-tabs">
+					<p>This will be the training screen</p>
+				</div>
+				<div id="field" class="village-tabs">
+					<p>This will be the field screen (collect items for potions, etc).</p>
+				</div>
+				<div id="shop" class="village-tabs">
+					<p>This will be the shop screen.</p>
+				</div>
+				<div id="tavern" class="village-tabs">
+					<p>This will be the tavern screen.</p>
 				</div>
 			</div>
 		</div>
