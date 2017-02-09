@@ -11,18 +11,47 @@ var newGame = checkNewGame(); //checks whether or not to reset the localStorage
 var currentChar = null; //global variable for player's character
 var maxHealth = 100;//default in case things go wrong with the localStorage
 var maxMana = 30;
+var exp = 0;
 var currHealthRate = 10;
 var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
 var slot = 0; //sets slot for data grabbing and stuff
+//var alreadyloaded = 0;//makes sure story doesn't load dupes
 var fireEnemies = [
-	new Enemy("Dragon Scout", 150, 10, 20, 1)
+	new Enemy("Dragon Scout", 150, 10, 20, 1),
+	new Enemy("Dragon Novice", 175, 15, 23, 2),
+	new Enemy("Embereye", 200, 20, 29, 3),
+	new Enemy("Flamear", 225, 28, 33, 4)
 ];//list of enemies of the Ice Masters
 var iceEnemies = [
-	new Enemy("Frost Scout", 150, 10, 20, 1)
+	new Enemy("Frost Scout", 150, 10, 20, 1),
+	new Enemy("Frost Novice", 175, 15, 23, 2)
 ];//list of enemies of the Dragons
 var enemies = [];//empty enemy list, filled during setup
 var enemy; //holds current enemy
+var story = [
+	"<div class='tab-pane' id='prol'><p>Part1</p></div>",
+	"<div class='tab-pane' id='grass'><p>part2</p></div>",
+	"<p>part3</p>",
+	"<p>part4</p>",
+	"<p>part5</p>",
+	"<p>part6</p>"
+]; //holds story parts
+var storyLis = [
+	"<li class='tab col s2'><a href='#prol'>Prologue</a></li><li class='tab col s2'><a href='#grass'>Grassy Knoll</a></li>"
+]; //holds lis for story tabs
+var inventory = [];
+var potion_types = [
+	"health", //gives HP
+	"strength", //boosts strength stat
+	"magic" //gives mana
+];//holds potion list for dropping
+var spells = [
+	//spells in arsenal
+];
+var spell_types = [
+	//all spells to get
+];
 
 /**************************************
 	CONSTRUCTORS
@@ -43,6 +72,7 @@ function Character(name, gender, age, species, fireOrIce){
 	this.health = 100;
 	this.experience = 0;
 	this.level = 1;
+	this.story = 1;
 }
 
 function Enemy(name, health, min, max, level){
@@ -51,7 +81,7 @@ function Enemy(name, health, min, max, level){
 	this.minDamage = min;
 	this.maxDamage = max;
 	this.level = level;
-	this.numKilled = 0;
+	this.numKilled = 0; //decides when you can leave an area
 }
 
 /**************************************
@@ -62,9 +92,9 @@ function initGame(){
 	if(newGame){
 		//set up local storage
 		setData("slot1", null); 
-		setData("slot1", null); 
-		setData("slot1", null); 
-		setData("slot1", null); 
+		setData("slot2", null); 
+		setData("slot3", null); 
+		setData("slot4", null); 
 		setData("newGame", false); 
 	}
 	
@@ -97,6 +127,15 @@ function setUp(){
 	slot = getQueryVariable("slot");
 	currentChar = JSON.parse(getData("slot" + slot));
 	$('#name').html(currentChar.name);
+	var info = currentChar.age + " year-old " + currentChar.species;
+	$('#pInfo').html(info);
+	loadStory(currentChar.story);
+	exp = currentChar.experience;
+	var maxExp = parseInt($('#exp').attr("aria-valuemax"));
+	var percent = 100 * (exp/maxExp);
+	$('#exp').attr("style", "width: " + percent + "%;");
+	$('.exp').attr("data-tooltip", "" + exp + "/" + maxExp);
+	
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
 	upHealth(maxHealth);
@@ -139,6 +178,7 @@ function fight(){
 	if($('#enemyH').attr("aria-valuenow") < 1){
 		log("You defeated the " + enemy.name + "!");
 		addExp();
+		clearLog();
 		setEnemy();
 	}
 	else{
@@ -149,9 +189,25 @@ function fight(){
 			log("You have been terribly wounded. Neandra spends " + random(10, 70) + " of her mana to heal you. You must rest.");
 			lowerExp();
 			rest();
+			clearLog();
 			setEnemy();
 		}
 	}
+}
+
+function loadStory(partsLoaded){
+	$('#story').html("<ul id='tabshere' class='tabs'></ul><div id='partshere'></div>");
+	for(var i = 0; i < partsLoaded; i+=5){
+		if(i%5 == 0){//every fifth kill mark
+			//load new li
+			console.log("I = " + i);
+			$('#tabshere').append(storyLis[i]	);
+		}
+	}
+	for(var n = 0; n < partsLoaded; n++){
+		$('#partshere').append(story[n]);
+	}
+	initTabs();
 }
 
 
@@ -170,7 +226,8 @@ function upHealth(num){
 	var maxNum = parseInt($('#health').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#health').attr("style", "width: " + percent + "%;");
-	$('#health').html("" + currentNum + "/" + maxNum);
+	$('.health').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function upMana(num){
@@ -181,7 +238,8 @@ function upMana(num){
 	var maxNum = parseInt($('#mana').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#mana').attr("style", "width: " + percent + "%;");
-	$('#mana').html("" + currentNum + "/" + maxNum);
+	$('.mana').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function downHealth(num){
@@ -192,7 +250,8 @@ function downHealth(num){
 	var maxNum = parseInt($('#health').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#health').attr("style", "width: " + percent + "%;");
-	$('#health').html("" + currentNum + "/" + maxNum);
+	$('.health').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function downMana(num){
@@ -202,7 +261,8 @@ function downMana(num){
 	var maxNum = parseInt($('#mana').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#mana').attr("style", "width: " + percent + "%;");
-	$('#mana').html("" + currentNum + "/" + maxNum);
+	$('.mana').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function downEHealth(num){
@@ -213,7 +273,8 @@ function downEHealth(num){
 	var maxNum = parseInt($('#enemyH').attr("aria-valuemax"));
 	var percent = 100 * (currentNum/maxNum);
 	$('#enemyH').attr("style", "width: " + percent + "%;");
-	$('#enemyH').html("" + currentNum + "/" + maxNum);
+	$('.enemy').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function checkNewGame(){
@@ -236,7 +297,7 @@ function fillSlot(slot){
 	}
 	else{
 		var player = JSON.parse(getData("slot" + slot));
-		player = player.name + " " + player.level;
+		player = player.name + "</br>Level: " + player.level;
 	
 	loadButton = "<a class='load btn' href='play.html?slot=" + slot + "'>Load Player</a>";
 	}
@@ -244,8 +305,7 @@ function fillSlot(slot){
 }
 
 //from CSS-Tricks: https://css-tricks.com/snippets/javascript/get-url-variables/
-function getQueryVariable(variable)
-{
+function getQueryVariable(variable){
        var query = window.location.search.substring(1);
        var vars = query.split("&");
        for (var i=0;i<vars.length;i++) {
@@ -286,7 +346,8 @@ function setEnemy(){
 		"style" : "width: 100%;"
 	});
 	
-	$('#enemyH').html("" + enemy.health + "/" + enemy.health);
+	$('.enemy').attr("data-tooltip", "" + enemy.health + "/" + enemy.health);
+	initTooltip();
 	
 	var stats = "<h4>" + enemy.name + "</h4>\nStrength: " + enemy.minDamage + "-" + enemy.maxDamage + "\nKilled: " + enemy.numKilled;
 	
@@ -294,32 +355,53 @@ function setEnemy(){
 	
 }
 
-function log(message){
-	$('.log').append("<p>" + message + "</p>");
+function log(message){	
+	$('.log .card-content > p:nth-child(2)').before("<p>" + message + "</p>");
 	console.log(message);
 }
 
+function clearLog(){
+	$('.log .card-content p').remove();
+}
+
+function toast(message){
+	Materialize.toast(message, 4000);
+}
+
 function addExp(enemyLevel){
-	currentChar.experience+=(enemyLevel*0.1);
+	/*currentChar.experience+=(enemyLevel*0.1);
 	//if experience is a certain level, level up
 	if(currentChar.experience >= 300+((level + enemyLevel) * 80)){
 	  levelUp();
 	  currentChar.experience = 0;
-	}
+	}*/
+	var currentNum = currentChar.experience;
+	var maxNum = parseInt($('#exp').attr("aria-valuemax"));
+	var percent = 100 * (currentNum/maxNum);
+	$('#exp').attr("style", "width: " + percent + "%;");
+	$('.exp').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function lowerExp(){
-	currentChar.experience-=(level*0.05);
+	/*currentChar.experience-=(level*0.05);
 	//don't let experience be less than 0
 	if(currentChar.experience < 0){
 	  currentChar.experience = 0;
-	}
+	}*/
+	var currentNum = currentChar.experience;
+	var maxNum = parseInt($('#exp').attr("aria-valuemax"));
+	var percent = 100 * (currentNum/maxNum);
+	$('#exp').attr("style", "width: " + percent + "%;");
+	$('.exp').attr("data-tooltip", "" + currentNum + "/" + maxNum);
+	initTooltip();
 }
 
 function levelUp(){
   currentChar.level++;
   refactorStats();
   //toast levelup
+  toast("Levelled up to level " + currentChar.level);
 }
 
 function refactorStats(){
@@ -329,4 +411,13 @@ function refactorStats(){
   currentChar.strength = strBaseLevel + (level*0.3) + strMulti;
   currentChar.agility = agilBaseLevel + (level * )*/
   console.log('Stats refactored.');
+}
+
+function initTooltip(){
+    $('.tooltipped').tooltip();
+}
+
+function initTabs(){
+    $('ul.tabs').tabs();
+	console.log('tabs initialized');
 }
