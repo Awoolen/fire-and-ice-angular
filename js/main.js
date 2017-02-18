@@ -16,9 +16,12 @@ var currHealthRate = 10;
 var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
 var slot = 0; //sets slot for data grabbing and stuff
+//var alreadyloaded = 0;//makes sure story doesn't load dupes
 var fireEnemies = [
 	new Enemy("Dragon Scout", 150, 10, 20, 1),
-	new Enemy("Dragon Novice", 175, 15, 23, 2)
+	new Enemy("Dragon Novice", 175, 15, 23, 2),
+	new Enemy("Embereye", 200, 20, 29, 3),
+	new Enemy("Flamear", 225, 28, 33, 4)
 ];//list of enemies of the Ice Masters
 var iceEnemies = [
 	new Enemy("Frost Scout", 150, 10, 20, 1),
@@ -27,12 +30,15 @@ var iceEnemies = [
 var enemies = [];//empty enemy list, filled during setup
 var enemy; //holds current enemy
 var story = [
-	"Part1",
-	"part2",
-	"part3"
+	"<div class='tab-pane' id='prol'><p>Part1</p></div>",
+	"<div class='tab-pane' id='grass'><p>part2</p></div>",
+	"<p>part3</p>",
+	"<p>part4</p>",
+	"<p>part5</p>",
+	"<p>part6</p>"
 ]; //holds story parts
 var storyLis = [
-	"<li>1</li>"
+	"<li class='tab col s2'><a href='#prol'>Prologue</a></li><li class='tab col s2'><a href='#grass'>Grassy Knoll</a></li>"
 ]; //holds lis for story tabs
 var inventory = [];
 var potion_types = [
@@ -40,6 +46,12 @@ var potion_types = [
 	"strength", //boosts strength stat
 	"magic" //gives mana
 ];//holds potion list for dropping
+var spells = [
+	//spells in arsenal
+];
+var spell_types = [
+	//all spells to get
+];
 
 /**************************************
 	CONSTRUCTORS
@@ -117,6 +129,7 @@ function setUp(){
 	$('#name').html(currentChar.name);
 	var info = currentChar.age + " year-old " + currentChar.species;
 	$('#pInfo').html(info);
+	loadStory(currentChar.story);
 	exp = currentChar.experience;
 	var maxExp = parseInt($('#exp').attr("aria-valuemax"));
 	var percent = 100 * (exp/maxExp);
@@ -124,7 +137,6 @@ function setUp(){
 	$('.exp').attr("data-tooltip", "" + exp + "/" + maxExp);
 	
 	$(".village-tabs").hide();
-	
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
 	upHealth(maxHealth);
@@ -184,13 +196,19 @@ function fight(){
 	}
 }
 
-function story(partsLoaded){
-	for(var i = 0; i < partsLoaded; i++){
-		if(i%5 == 0){
-			//load new ul
+function loadStory(partsLoaded){
+	$('#story').html("<ul id='tabshere' class='tabs'></ul><div id='partshere'></div>");
+	for(var i = 0; i < partsLoaded; i+=5){
+		if(i%5 == 0){//every fifth kill mark
+			//load new li
+			console.log("I = " + i);
+			$('#tabshere').append(storyLis[i]	);
 		}
-		//load story part
 	}
+	for(var n = 0; n < partsLoaded; n++){
+		$('#partshere').append(story[n]);
+	}
+	initTabs();
 }
 
 
@@ -398,4 +416,9 @@ function refactorStats(){
 
 function initTooltip(){
     $('.tooltipped').tooltip();
+}
+
+function initTabs(){
+    $('ul.tabs').tabs();
+	console.log('tabs initialized');
 }
