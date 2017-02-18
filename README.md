@@ -19,7 +19,7 @@ Ok, so I don't have a testing environment at all, so basically just run your tes
 
 ## Contributing
 
-Please see CONTRIBUTING.md for more info on how to help out!
+Please see [CONTRIBUTING.md](https://github.com/LunarGem/fire-and-ice/blob/master/CONTRIBUTING.md) for more info on how to help out!
 
 ## Versioning
 
