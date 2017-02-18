@@ -4,6 +4,7 @@ Hey! We absolutely love pull requests and feature suggestions! Before making a p
 
 * If new feature, submit issue asking if it's something we plan to add. If you get approval to work on it, go for it!
 * Fork the master branch and make your changes there.
+  * If you need a Sass compile, just mention me @LunarGem and I'll do your compile for you :) Don't edit the CSS files, it makes the Sass gods angry!
 * When you're done, create a pull request.
 * When someone's signed off on it, it can be merged.
 * You're done!
