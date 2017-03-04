@@ -11,7 +11,7 @@ For development, just make sure you have your favorite text editor and know how 
 
 To install and use Sass, follow the instructions at [their website](http://sass-lang.com/) or in the readme in their [repo.](https://github.com/sass/sass) I personally run Sass on a Raspberry Pi running Jessie, but you don't need to do that. If you can't get it working, just open an issue asking for a compile on your branch (see Contributing for more information). You won't necessarily need it if you won't be working with the CSS.
 
-Otherwise, It's just JS and HTML, some Bootstrap hacks are in there but are (maybe) in the process of being removed. Just clone the repo in your prefferred manner and start working! Based on the guidelines please!
+Otherwise, It's just JS and HTML, some Bootstrap hacks are in there but are (maybe) in the process of being removed. Just clone the repo in your preferred manner and start working! Based on the guidelines please!
 
 ## Running Tests
 
