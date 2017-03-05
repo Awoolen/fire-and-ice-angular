@@ -536,6 +536,12 @@ function dropGold(dropper){
 }
 
 
+function showVillage(toShow){
+	$('.village-main').hide();
+	$(toShow).show();
+}
+
+
 function initTooltip(){
     $('.tooltipped').tooltip();
 }
