@@ -543,7 +543,8 @@ function showVillage(toShow){
 
 
 function initTooltip(){
-    $('.tooltipped').tooltip();
+	$('.tooltipped').tooltip('remove');
+  $('.tooltipped').tooltip();
 }
 
 function initTabs(){
