@@ -3,6 +3,7 @@ An RPG incremental implemented in JavaScript. Written so I can learn more JS and
 
 *You’re running. It doesn’t matter where or why, but you’re running. You run right through a shimmering patch of air, and it all goes dark. You’re not running anymore. You wake in a cave. A girl, mismatched eyes, golden hair, looks down on you from above. “Hello. I’m Crystal Ice. You can call me either. What’s your name?”*
 
+
 ## Getting Started
 
 Once the website is up, just click the link I'll put here to play!
