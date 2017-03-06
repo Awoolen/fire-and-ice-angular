@@ -34,3 +34,8 @@ body{
 nav{
 	text-align: left;
 }
+
+.horizontal > .card-image{
+	object-fit: contain;
+	object-position: 0 0;
+}
