@@ -18,6 +18,7 @@ var ravens = 0;
 var currHealthRate = 10;
 var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
+var doneResting = true;
 var slot = 0; //sets slot for data grabbing and stuff
 //var alreadyloaded = 0;//makes sure story doesn't load dupes
 var fireEnemies = [
@@ -200,15 +201,20 @@ function rest(){
 	if (!resting) {
 		timeoutID = setInterval(function () {
 			resting = true;
+			doneResting = false;
 			upHealth(currHealthRate);
 
 	        if($('#health').attr("aria-valuenow") >= maxHealth){
 				console.log("done resting");
 				$('#health').attr("aria-valuenow", maxHealth);
 				resting = false;
+				doneResting = true;
 				clearInterval(timeoutID);
 			}
 	    }, 2000);
+	}
+	if(doneResting){
+		return;
 	}
 }
 
