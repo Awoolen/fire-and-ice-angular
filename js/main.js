@@ -173,6 +173,7 @@ function setUp(){
 	$('#pInfo').html(info);
 	updateCurrency();
 	loadStory(currentChar.story);
+	changeArea('knoll');
 	exp = currentChar.experience;
 	var maxExp = parseInt($('#exp').attr("aria-valuemax"));
 	var percent = 100 * (exp/maxExp);
@@ -545,6 +546,26 @@ function dropGold(dropper){
 function showVillage(toShow){
 	$('.village-main').hide();
 	$(toShow).show();
+}
+
+function hideVillage(){
+	$('.village-tabs').hide();
+	$('.village-main').show();
+}
+
+
+function changeArea(area){
+	//make it so they can encounter the enemies that lurk here
+	loadBreadcrumbs(area);
+}
+
+function loadBreadcrumbs(toArea){
+	if(toArea == "knoll"){
+		$('nav .nav-wrapper .battle').html(
+			"<a href='changeArea('knoll')' class='breadcrumb'>Grassy Knoll</a>"
+		);
+	}
+	//else if another area add breadcrumbs for both
 }
 
 
