@@ -18,4 +18,11 @@ body {
 .tab {
   font-size: 15px; }
 
+nav {
+  text-align: left; }
+
+.horizontal > .card-image {
+  object-fit: contain;
+  object-position: 0 0; }
+
 /*# sourceMappingURL=fireice.css.map */
