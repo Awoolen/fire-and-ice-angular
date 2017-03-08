@@ -50,6 +50,7 @@ var armor_types = ["Shield", "Helmet", "Cloak"]; //holds armor list for dropping
 var prefixes  = ["Fell", "Mighty", "Valorous"]; //no effects, just cool ;)
 var suffixes = ["of Summoning", "of Speed", "of Carelessness", "of Wisdom"]; //holds suffixes, drop methods which create objects determine effects, add more later (for each stat boost?)
 var inventory = []; //initially empty, holds Armor, Spellbook, and Weapon objects
+var equipped = [new Weapon("Sword", "Boring Sword of Mediocrity", 1, "none")]; //initially has the default weapon
 var potionBar = []; // initially empty, holds Potion objects
 var potion_types = [
 	"health", //gives HP
@@ -568,6 +569,10 @@ function loadBreadcrumbs(toArea){
 	//else if another area add breadcrumbs for both
 }
 
+
+function stockInventory(){
+
+}
 
 function initTooltip(){
 	$('.tooltipped').tooltip('remove');
