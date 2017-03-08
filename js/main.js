@@ -174,6 +174,7 @@ function setUp(){
 	$('#pInfo').html(info);
 	updateCurrency();
 	loadStory(currentChar.story);
+	stockInventory();
 	changeArea('knoll');
 	exp = currentChar.experience;
 	var maxExp = parseInt($('#exp').attr("aria-valuemax"));
@@ -571,7 +572,18 @@ function loadBreadcrumbs(toArea){
 
 
 function stockInventory(){
-
+	if(inventory.length > 0){
+		for(var item of inventory){
+			var prev = $('#inv > .carousel').html();
+			var curr = "<a class='carousel-item'><div class='card'><div class='card-content medium'><span class='card-title'>" + item.name + "</span><img src='" + (weapon.type).toLowerCase() + "'/><p><a href='equip(" + item + ")'>Equip</a></p></div></div></a>";
+			$('#inv > .carousel').html(prev + curr);
+		}
+	}
+	else{
+		$('#inv > .carousel').html(
+			"<a class='carousel-item'><div class='card'><div class='card-content medium'><span class='card-title'>Empty</span><p>There's nothing here! Kill monsters for a chance to get more items.</p></div></div></a>"
+		);
+	}
 }
 
 function initTooltip(){
