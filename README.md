@@ -6,14 +6,14 @@ An RPG incremental implemented in JavaScript. Written so I can learn more JS and
 
 ## Getting Started
 
-Once the website is up, just click the link I'll put here to play!
+Once the website is up, just click the link I'll put here to play! While it's still in development you can just download it and run index.html and you should be on your way.
 
 For development, just make sure you have your favorite text editor and know how to use your browser's development tools. You'll need a Sass compiler if you'll be messing with design. You'll want to familiarize yourself with [Materialize!](http://materializecss.com)
 
 
 To install and use Sass, follow the instructions at [their website](http://sass-lang.com/) or in the readme in their [repo.](https://github.com/sass/sass) I personally run Sass on a Raspberry Pi running Jessie, but you don't need to do that. If you can't get it working, just open an issue asking for a compile on your branch (see Contributing for more information). You won't necessarily need it if you won't be working with the CSS.
 
-Otherwise, It's just JS and HTML, some Bootstrap hacks are in there but are (maybe) in the process of being removed. Just clone the repo in your prefferred manner and start working! Based on the guidelines please!
+Otherwise, It's just JS and HTML, some Bootstrap hacks are in there but are (maybe) in the process of being removed. Just clone the repo in your preferred manner and start working! Based on the guidelines please!
 
 ## Running Tests
 
