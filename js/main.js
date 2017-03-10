@@ -1,7 +1,7 @@
-/* Welcome to Fire and Ice! This will probably be a big mess of a file! Yay for code! 
+/* Welcome to Fire and Ice! This will probably be a big mess of a file! Yay for code!
 
 	WHOA MY GOSH I'M USING COOKIES! Never done this before! I don't know what I'm doing at all!
-	
+
 	EDIT: Aaaand nooooow, using... *drumroll* ...localStorage! Which is actually 10x more simple than I thought it would be!
 */
 /*************************************
@@ -16,7 +16,7 @@ var currHealthRate = 10;
 var currManaRate = 5;
 var resting = false; // checks whether player is currently resting
 var slot = 0; //sets slot for data grabbing and stuff
-//var alreadyloaded = 0;//makes sure story doesn't load dupes
+var liLoaded = 2; //sees how many lis should be loaded for story parts;
 var fireEnemies = [
 	new Enemy("Dragon Scout", 150, 10, 20, 1),
 	new Enemy("Dragon Novice", 175, 15, 23, 2),
@@ -29,17 +29,6 @@ var iceEnemies = [
 ];//list of enemies of the Dragons
 var enemies = [];//empty enemy list, filled during setup
 var enemy; //holds current enemy
-var story = [
-	"<div class='tab-pane' id='prol'><p>Part1</p></div>",
-	"<div class='tab-pane' id='grass'><p>part2</p></div>",
-	"<p>part3</p>",
-	"<p>part4</p>",
-	"<p>part5</p>",
-	"<p>part6</p>"
-]; //holds story parts
-var storyLis = [
-	"<li class='tab col s2'><a href='#prol'>Prologue</a></li><li class='tab col s2'><a href='#grass'>Grassy Knoll</a></li>"
-]; //holds lis for story tabs
 var inventory = [];
 var potion_types = [
 	"health", //gives HP
@@ -72,7 +61,8 @@ function Character(name, gender, age, species, fireOrIce){
 	this.health = 100;
 	this.experience = 0;
 	this.level = 1;
-	this.story = 1;
+	this.story = 2;
+	this.lis = 2;
 }
 
 function Enemy(name, health, min, max, level){
@@ -84,6 +74,8 @@ function Enemy(name, health, min, max, level){
 	this.numKilled = 0; //decides when you can leave an area
 }
 
+//story constructor in story file so it can reach it :)
+
 /**************************************
 	MAIN METHODS
 ***************************************/
@@ -91,15 +83,15 @@ function initGame(){
 	//set up vars and things
 	if(newGame){
 		//set up local storage
-		setData("slot1", null); 
-		setData("slot2", null); 
-		setData("slot3", null); 
-		setData("slot4", null); 
-		setData("newGame", false); 
+		setData("slot1", null);
+		setData("slot2", null);
+		setData("slot3", null);
+		setData("slot4", null);
+		setData("newGame", false);
 	}
-	
+
 	checkSlots();
-	
+
 }
 
 function createChar(){
@@ -108,19 +100,19 @@ function createChar(){
 	var gender = $('input[name="gender"]:checked').val();
 	var species = $('#species').val();
 	var fireice = $('input[name="fireice"]:checked').val();
-	
+
 	currentChar = new Character(name, gender, age, species, fireice);
-	
+
 	slot = getQueryVariable("slot");
-	
-		
+
+
 	setData("slot" + slot, JSON.stringify(currentChar));
-	
-	
+
+
 	location.href = "play.html?slot=" + slot;
-	
+
 	return false;
-	
+
 }
 
 function setUp(){
@@ -135,7 +127,7 @@ function setUp(){
 	var percent = 100 * (exp/maxExp);
 	$('#exp').attr("style", "width: " + percent + "%;");
 	$('.exp').attr("data-tooltip", "" + exp + "/" + maxExp);
-	
+
 	maxHealth = currentChar.health;
 	$('#health').attr("aria-valuemax", maxHealth);
 	upHealth(maxHealth);
@@ -146,7 +138,7 @@ function setUp(){
 		enemies = iceEnemies;
 	else
 		enemies = fireEnemies;
-	
+
 	setEnemy();
 }
 
@@ -194,22 +186,6 @@ function fight(){
 		}
 	}
 }
-
-function loadStory(partsLoaded){
-	$('#story').html("<ul id='tabshere' class='tabs'></ul><div id='partshere'></div>");
-	for(var i = 0; i < partsLoaded; i+=5){
-		if(i%5 == 0){//every fifth kill mark
-			//load new li
-			console.log("I = " + i);
-			$('#tabshere').append(storyLis[i]	);
-		}
-	}
-	for(var n = 0; n < partsLoaded; n++){
-		$('#partshere').append(story[n]);
-	}
-	initTabs();
-}
-
 
 
 /**************************************
@@ -298,7 +274,7 @@ function fillSlot(slot){
 	else{
 		var player = JSON.parse(getData("slot" + slot));
 		player = player.name + "</br>Level: " + player.level;
-	
+
 	loadButton = "<a class='load btn' href='play.html?slot=" + slot + "'>Load Player</a>";
 	}
 	$('#slot'+slot).html("<td class='name'>" + player + "</td><td>" + loadButton + "</td>");
@@ -339,23 +315,23 @@ function setEnemy(){
 	do{
 		enemy = enemies[random(0, 1)];
 	}while(enemy.level > currentChar.level);
-	
+
 	$('#enemyH').attr({
 		"aria-valuenow" : enemy.health,
 		"aria-valuemax" : enemy.health,
 		"style" : "width: 100%;"
 	});
-	
+
 	$('.enemy').attr("data-tooltip", "" + enemy.health + "/" + enemy.health);
 	initTooltip();
-	
+
 	var stats = "<h4>" + enemy.name + "</h4>\nStrength: " + enemy.minDamage + "-" + enemy.maxDamage + "\nKilled: " + enemy.numKilled;
-	
+
 	$('#eInfo').html(stats);
-	
+
 }
 
-function log(message){	
+function log(message){
 	$('.log .card-content > p:nth-child(2)').before("<p>" + message + "</p>");
 	console.log(message);
 }
