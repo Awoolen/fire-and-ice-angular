@@ -1,7 +1,10 @@
 # fire-and-ice
-An RPG incremental implemented in JavaScript. Written so I can learn more JS and have fun!
+An RPG implemented in JavaScript. Written so I can learn more JS and have fun!
 
 *You’re running. It doesn’t matter where or why, but you’re running. You run right through a shimmering patch of air, and it all goes dark. You’re not running anymore. You wake in a cave. A girl, mismatched eyes, golden hair, looks down on you from above. “Hello. I’m Crystal Ice. You can call me either. What’s your name?”*
+
+## Ok so here's the deal...
+A lot has happened since I last updated this, and honestly I was running into a lot of implementation problems. Then I start coding again, and my brain decides that we'll use Node this time so that half of this stuff can be done for me via npm! Which means a complete and total redesign. Yeah. The old files are still in my possession (though who would want those old things) and I'm starting work on the new project. Thanks to everyone who helped me out with the pre-alpha and getting my head screwed on straight about what I'm actually doing. I promise, your work did help and it's still in my head somewhere! I'll update the readme when I start making progress. See you soon!
 
 ## Getting Started
 
