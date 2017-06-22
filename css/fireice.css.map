@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAKA,IAAI;EACH,gBAAgB,EAJD,OAAO;EAKtB,WAAW,EAAE,0BAA0B;EACvC,SAAS,EAAE,IAAI;;AAEhB,QAAQ;EACP,gBAAgB,EAAE,kBAA0B;;AAM7C,UAAU;EACT,gBAAgB,EAdL,OAAO;;AAiBnB,YAAY;EACX,gBAAgB,EAnBA,OAAO;;AAsBxB,YAAY;EACX,gBAAgB,EA1BH,OAAO;;AA6BrB,IAAI;EACH,SAAS,EAAE,IAAI",
-"sources": ["../sass/fireice.scss"],
-"names": [],
-"file": "fireice.css"
-}
